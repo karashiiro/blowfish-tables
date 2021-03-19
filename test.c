@@ -21,14 +21,16 @@ bool ArraysEqual1D(
 }
 
 bool ArraysEqual2D(
-    unsigned int **arr1, size_t arr1_size1, size_t arr1_size2,
-    unsigned int **arr2, size_t arr2_size1, size_t arr2_size2
+    unsigned int *arr1, size_t arr1_size1, size_t arr1_size2,
+    unsigned int *arr2, size_t arr2_size1, size_t arr2_size2
 ) {
     if (arr1_size1 != arr2_size1 || arr1_size2 != arr2_size2) return false;
 
+    unsigned int **arr1_2d = (unsigned int **)&arr1[0];
+    unsigned int **arr2_2d = (unsigned int **)&arr2[0];
     for (size_t i = 0; i < arr1_size1; i++) {
         for (size_t j = 0; j < arr1_size2; j++) {
-            if (arr1[i][j] != arr2[i][j]) {
+            if (arr1_2d[i][j] != arr2_2d[i][j]) {
                 return false;
             }
         }
@@ -41,12 +43,12 @@ int main() {
     unsigned int p_array[18];
     unsigned int s_boxes[4][256];
     MakeBlowfishPArray(p_array, sizeof(p_array));
-    MakeBlowfishSBoxes(s_boxes, sizeof(s_boxes), sizeof(s_boxes[0]));
+    MakeBlowfishSBoxes(&s_boxes[0][0], sizeof(s_boxes), sizeof(s_boxes[0]));
     assert(ArraysEqual1D(
         p_array, sizeof(p_array),
         PArray,  sizeof(PArray)));
     assert(ArraysEqual2D(
-        s_boxes, sizeof(s_boxes), sizeof(s_boxes[0]),
-        SBoxes,  sizeof(SBoxes),  sizeof(SBoxes[0])));
+        &s_boxes[0][0], sizeof(s_boxes), sizeof(s_boxes[0]),
+        &SBoxes[0][0],  sizeof(SBoxes),  sizeof(SBoxes[0])));
     return 0;
 }
