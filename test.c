@@ -38,17 +38,24 @@ bool ArraysEqual2D(
 
     return true;
 }
-
+#include <stdio.h>
 int main() {
-    unsigned int p_array[18];
+    printf("0x3.");
+    for (int i = 0; i < 32; i++) {
+        printf("%x", _calcPiFractionalDigit(i + 1));
+    }
+    /*unsigned int p_array[18];
     unsigned int s_boxes[4][256];
     MakeBlowfishPArray(p_array, sizeof(p_array));
+    for (int i = 0; i < sizeof(p_array); i++) {
+        printf("%x\n", p_array[i]);
+    }
     MakeBlowfishSBoxes(&s_boxes[0][0], sizeof(s_boxes), sizeof(s_boxes[0]));
     assert(ArraysEqual1D(
         p_array, sizeof(p_array),
         PArray,  sizeof(PArray)));
     assert(ArraysEqual2D(
         &s_boxes[0][0], sizeof(s_boxes), sizeof(s_boxes[0]),
-        &SBoxes[0][0],  sizeof(SBoxes),  sizeof(SBoxes[0])));
+        &SBoxes[0][0],  sizeof(SBoxes),  sizeof(SBoxes[0])));*/
     return 0;
 }
