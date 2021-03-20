@@ -6,8 +6,20 @@
 #include <math.h>
 #include <stddef.h>
 
-const unsigned char __PI_DIGITS[] =
-    {1,4,1,5,9,2,6,5,3,5,8,9};
+size_t _powermod(size_t base, size_t exp, size_t mod) {
+    if (mod == 1)
+        return 0;
+    size_t result = 1;
+    base %= mod;
+    while (exp > 0) {
+        if (exp % 2 == 1) {
+            result = (result * base) % mod;
+        }
+        exp = exp >> 1;
+        base = (base * base) % mod;
+    }
+    return result;
+}
 
 double _fPart(double x) {
     return x - floor(x);
@@ -18,8 +30,7 @@ double _calcPiSum(size_t n, int j) {
     double sum = 0;
     size_t denominator = j;
     for (int k = 0; k <= n; k++) {
-        size_t numerator = pow(16, n - k);
-        sum += (double)(numerator % denominator) / denominator;
+        sum = _fPart(sum + (double)_powermod(16, n - k, denominator) / denominator);
         denominator += 8;
     }
 
@@ -31,7 +42,7 @@ double _calcPiSum(size_t n, int j) {
         denominator += 8;
     }
 
-    return sum;
+    return _fPart(sum);
 }
 
 /* See https://en.wikipedia.org/wiki/Bailey–Borwein–Plouffe_formula#BBP_digit-extraction_algorithm_for_π */

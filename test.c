@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdbool.h> 
 #include <stddef.h>
+#include <stdio.h>
 
 bool ArraysEqual1D(
     unsigned int *arr1, size_t arr1_size,
@@ -38,24 +39,20 @@ bool ArraysEqual2D(
 
     return true;
 }
-#include <stdio.h>
+
 int main() {
-    printf("0x3.");
-    for (int i = 0; i < 32; i++) {
-        printf("%x", _calcPiFractionalDigit(i + 1));
-    }
-    /*unsigned int p_array[18];
+    unsigned int p_array[18];
     unsigned int s_boxes[4][256];
-    MakeBlowfishPArray(p_array, sizeof(p_array));
-    for (int i = 0; i < sizeof(p_array); i++) {
-        printf("%x\n", p_array[i]);
-    }
-    MakeBlowfishSBoxes(&s_boxes[0][0], sizeof(s_boxes), sizeof(s_boxes[0]));
+    MakeBlowfishPArray(p_array, sizeof(p_array) / sizeof(p_array[0]));
+    MakeBlowfishSBoxes(&s_boxes[0][0], sizeof(s_boxes) / sizeof(s_boxes[0]), sizeof(s_boxes[0]) / sizeof(s_boxes[0][0]));
     assert(ArraysEqual1D(
-        p_array, sizeof(p_array),
-        PArray,  sizeof(PArray)));
+        p_array, sizeof(p_array) / sizeof(p_array[0]),
+        PArray,  sizeof(PArray) / sizeof(PArray[0])));
+    printf("PASS: P-array generated with correct values.\n");
     assert(ArraysEqual2D(
-        &s_boxes[0][0], sizeof(s_boxes), sizeof(s_boxes[0]),
-        &SBoxes[0][0],  sizeof(SBoxes),  sizeof(SBoxes[0])));*/
+        &s_boxes[0][0], sizeof(s_boxes) / sizeof(s_boxes[0]), sizeof(s_boxes[0]) / sizeof(s_boxes[0][0]),
+        &SBoxes[0][0],  sizeof(SBoxes) / sizeof(SBoxes[0]), sizeof(SBoxes[0]) / sizeof(SBoxes[0][0])));
+    printf("PASS: Substitution boxes generated with correct values.\n");
+    printf("All tests passed.\n");
     return 0;
 }
