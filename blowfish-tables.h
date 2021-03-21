@@ -65,21 +65,21 @@ unsigned int _bftMakeGroup(size_t n) {
 }
 
 /** Builds a Blowfish p-array into the provided buffer. */
-void MakeBlowfishPArray(unsigned int *p_array, size_t subkey_count) {
-    size_t half_bytes = subkey_count * 8;
-    for (size_t n = 0; n < half_bytes; n += 8) {
-        p_array[n / 8] = _bftMakeGroup(n);
+void MakeBlowfishPArray(unsigned int *pArray, size_t subkeyCount) {
+    size_t halfBytes = subkeyCount * 8;
+    for (size_t n = 0; n < halfBytes; n += 8) {
+        pArray[n / 8] = _bftMakeGroup(n);
     }
 }
 
 /** Builds Blowfish substitution boxes into the provided buffer. */
-void MakeBlowfishSBoxes(unsigned int *s_boxes, size_t box_count, size_t box_size, size_t p_subkeys) {
-    size_t half_bytes = box_count * box_size * 8;
-    for (size_t b = 0; b < box_count; b++) {
-        size_t start_half_byte = b * (half_bytes / box_count);
-        size_t end_half_byte = (b + 1) * (half_bytes / box_count);
-        for (size_t n = start_half_byte; n < end_half_byte; n += 8) {
-            s_boxes[n / 8] = _bftMakeGroup(p_subkeys * 8 + n);
+void MakeBlowfishSBoxes(unsigned int *sBoxes, size_t boxCount, size_t boxSize, size_t pSubkeys) {
+    size_t halfBytes = boxCount * boxSize * 8;
+    for (size_t b = 0; b < boxCount; b++) {
+        size_t startHalfByte = b * (halfBytes / boxCount);
+        size_t endHalfByte = (b + 1) * (halfBytes / boxCount);
+        for (size_t n = startHalfByte; n < endHalfByte; n += 8) {
+            sBoxes[n / 8] = _bftMakeGroup(pSubkeys * 8 + n);
         }
     }
 }
