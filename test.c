@@ -44,17 +44,19 @@ bool ArraysEqual2D(
 
 int main() {
     unsigned int pArray[18];
-    unsigned int sBoxes[4][256];
     MakeBlowfishPArray(pArray, ARRAY_SIZE(pArray));
-    MakeBlowfishSBoxes(&sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]), ARRAY_SIZE(pArray));
     assert(ArraysEqual1D(
         pArray, ARRAY_SIZE(pArray),
         PArray,  ARRAY_SIZE(PArray)));
     printf("PASS: P-array generated with correct values.\n");
+
+    unsigned int sBoxes[4][256];
+    MakeBlowfishSBoxes(&sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]), ARRAY_SIZE(pArray));
     assert(ArraysEqual2D(
         &sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]),
         &SBoxes[0][0],  ARRAY_SIZE(SBoxes), ARRAY_SIZE(SBoxes[0])));
     printf("PASS: Substitution boxes generated with correct values.\n");
+
     printf("All tests passed.\n");
     return 0;
 }
