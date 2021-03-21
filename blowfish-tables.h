@@ -47,13 +47,13 @@ double _bftCalcPiSum(size_t n, int j) {
 }
 
 /* See https://en.wikipedia.org/wiki/Bailey–Borwein–Plouffe_formula#BBP_digit-extraction_algorithm_for_π */
-unsigned char _bftCalcPiFractionalDigit(size_t n) {
+unsigned int _bftCalcPiFractionalDigit(size_t n) {
     n--;
     double sum1 = 4 * _bftCalcPiSum(n, 1);
     double sum2 = 2 * _bftCalcPiSum(n, 4);
     double sum3 = _bftCalcPiSum(n, 5);
     double sum4 = _bftCalcPiSum(n, 6);
-    return (unsigned char)floor(16 * _bftFPart(sum1 - sum2 - sum3 - sum4));
+    return (unsigned int)floor(16 * _bftFPart(sum1 - sum2 - sum3 - sum4));
 }
 
 unsigned int _bftMakeGroup(size_t n) {
