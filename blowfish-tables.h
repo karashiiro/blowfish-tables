@@ -7,7 +7,7 @@
 #include <stddef.h>
 
 // https://en.wikipedia.org/wiki/Modular_exponentiation#Pseudocode
-static inline size_t _bftPowermod(size_t base, size_t exp, size_t mod) {
+size_t _bftPowermod(size_t base, size_t exp, size_t mod) {
     if (mod == 1)
         return 0;
     size_t result = 1;
@@ -22,7 +22,7 @@ static inline size_t _bftPowermod(size_t base, size_t exp, size_t mod) {
     return result;
 }
 
-static inline double _bftFPart(double x) {
+double _bftFPart(double x) {
     return x - floor(x);
 }
 
