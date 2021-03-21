@@ -22,7 +22,7 @@ static inline size_t _bftPowermod(size_t base, size_t exp, size_t mod) {
     return result;
 }
 
-double _bftFPart(double x) {
+static inline double _bftFPart(double x) {
     return x - floor(x);
 }
 
