@@ -56,8 +56,8 @@ unsigned char _bftCalcPiFractionalDigit(size_t n) {
     return (unsigned char)floor(16 * _bftFPart(sum1 - sum2 - sum3 - sum4));
 }
 
-unsigned _bftMakeGroup(size_t n) {
-    unsigned group;
+unsigned int _bftMakeGroup(size_t n) {
+    unsigned int group;
     for (int i = 1; i <= 8; i++) {
         group = (group << 4) | _bftCalcPiFractionalDigit(n + i);
     }
