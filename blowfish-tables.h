@@ -2,7 +2,6 @@
 #define MAKE_BLOWFISH_TABLES
 
 #include <assert.h>
-#include <float.h>
 #include <math.h>
 #include <stddef.h>
 
@@ -26,28 +25,15 @@ double _bftFPart(double x) {
     return x - floor(x);
 }
 
-double _bftCalcPiInfiniteSum(size_t n, int j) {
-    double sum = 0;
-    double numerator = 1.0 / 16;
-    double denominator = j + 8 * (n + 1);
-    double fractional;
-    while ((fractional = numerator / denominator) > DBL_EPSILON) {
-        sum += fractional;
-        numerator *= 1.0 / 16;
-        denominator += 8;
-    }
-    return sum;
-}
-
 // Based on https://giordano.github.io/blog/2017-11-21-hexadecimal-pi/
 double _bftCalcPiSum(size_t n, int j) {
-    // Start with the infinite sum rather than adding it at the end
-    double sum = _bftCalcPiInfiniteSum(n, j);
+    double sum = 0.0;
     size_t denominator = j;
     for (int k = 0; k <= n; k++) {
         sum += (double)_bftPowermod(16, n - k, denominator) / denominator;
         denominator += 8;
     }
+    // Completely elide the infinite sum
     return sum;
 }
 
