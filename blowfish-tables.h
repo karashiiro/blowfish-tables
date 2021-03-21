@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stddef.h>
 
+// https://en.wikipedia.org/wiki/Modular_exponentiation#Pseudocode
 size_t _powermod(size_t base, size_t exp, size_t mod) {
     if (mod == 1)
         return 0;
