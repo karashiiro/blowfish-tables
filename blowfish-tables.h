@@ -1,7 +1,6 @@
 #ifndef MAKE_BLOWFISH_TABLES
 #define MAKE_BLOWFISH_TABLES
 
-#include <assert.h>
 #include <math.h>
 #include <stddef.h>
 
