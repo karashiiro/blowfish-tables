@@ -56,19 +56,23 @@ unsigned char _bftCalcPiFractionalDigit(size_t n) {
     return (unsigned char)floor(16 * _bftFPart(sum1 - sum2 - sum3 - sum4));
 }
 
+unsigned _bftMakeGroup(size_t n) {
+    unsigned group = _bftCalcPiFractionalDigit(n + 1);
+    group = (group << 4) | _bftCalcPiFractionalDigit(n + 2);
+    group = (group << 4) | _bftCalcPiFractionalDigit(n + 3);
+    group = (group << 4) | _bftCalcPiFractionalDigit(n + 4);
+    group = (group << 4) | _bftCalcPiFractionalDigit(n + 5);
+    group = (group << 4) | _bftCalcPiFractionalDigit(n + 6);
+    group = (group << 4) | _bftCalcPiFractionalDigit(n + 7);
+    group = (group << 4) | _bftCalcPiFractionalDigit(n + 8);
+    return group;
+}
+
 /** Builds a Blowfish p-array into the provided buffer. */
 void MakeBlowfishPArray(unsigned int *p_array, size_t subkey_count) {
     size_t half_bytes = subkey_count * 8;
     for (size_t n = 0; n < half_bytes; n += 8) {
-        unsigned group = _bftCalcPiFractionalDigit(n + 1);
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + 2);
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + 3);
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + 4);
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + 5);
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + 6);
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + 7);
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + 8);
-        p_array[n / 8] = group;
+        p_array[n / 8] = _bftMakeGroup(n);
     }
 }
 
@@ -79,15 +83,7 @@ void MakeBlowfishSBoxes(unsigned int *s_boxes, size_t box_count, size_t box_size
         size_t start_half_byte = b * (half_bytes / box_count);
         size_t end_half_byte = (b + 1) * (half_bytes / box_count);
         for (size_t n = start_half_byte; n < end_half_byte; n += 8) {
-            unsigned group = _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 1);
-            group = (group << 4) | _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 2);
-            group = (group << 4) | _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 3);
-            group = (group << 4) | _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 4);
-            group = (group << 4) | _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 5);
-            group = (group << 4) | _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 6);
-            group = (group << 4) | _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 7);
-            group = (group << 4) | _bftCalcPiFractionalDigit(p_subkeys * 8 + n + 8);
-            s_boxes[n / 8] = group;
+            s_boxes[n / 8] = _bftMakeGroup(p_subkeys * 8 + n);
         }
     }
 }
