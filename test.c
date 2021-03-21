@@ -27,11 +27,9 @@ bool ArraysEqual2D(
 ) {
     if (arr1_size1 != arr2_size1 || arr1_size2 != arr2_size2) return false;
 
-    unsigned int **arr1_2d = (unsigned int **)&arr1[0];
-    unsigned int **arr2_2d = (unsigned int **)&arr2[0];
     for (size_t i = 0; i < arr1_size1; i++) {
         for (size_t j = 0; j < arr1_size2; j++) {
-            if (arr1_2d[i][j] != arr2_2d[i][j]) {
+            if (arr1[i * arr1_size2 + j] != arr2[i * arr1_size2 + j]) {
                 return false;
             }
         }
@@ -44,7 +42,7 @@ int main() {
     unsigned int p_array[18];
     unsigned int s_boxes[4][256];
     MakeBlowfishPArray(p_array, sizeof(p_array) / sizeof(p_array[0]));
-    MakeBlowfishSBoxes(&s_boxes[0][0], sizeof(s_boxes) / sizeof(s_boxes[0]), sizeof(s_boxes[0]) / sizeof(s_boxes[0][0]));
+    MakeBlowfishSBoxes(&s_boxes[0][0], sizeof(s_boxes) / sizeof(s_boxes[0]), sizeof(s_boxes[0]) / sizeof(s_boxes[0][0]), sizeof(p_array) / sizeof(p_array[0]));
     assert(ArraysEqual1D(
         p_array, sizeof(p_array) / sizeof(p_array[0]),
         PArray,  sizeof(PArray) / sizeof(PArray[0])));
