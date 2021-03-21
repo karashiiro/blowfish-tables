@@ -6,6 +6,10 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
+#endif
+
 bool ArraysEqual1D(
     unsigned int *arr1, size_t arr1Size,
     unsigned int *arr2, size_t arr2Size
@@ -41,15 +45,15 @@ bool ArraysEqual2D(
 int main() {
     unsigned int pArray[18];
     unsigned int sBoxes[4][256];
-    MakeBlowfishPArray(pArray, sizeof(pArray) / sizeof(pArray[0]));
-    MakeBlowfishSBoxes(&sBoxes[0][0], sizeof(sBoxes) / sizeof(sBoxes[0]), sizeof(sBoxes[0]) / sizeof(sBoxes[0][0]), sizeof(pArray) / sizeof(pArray[0]));
+    MakeBlowfishPArray(pArray, ARRAY_SIZE(pArray));
+    MakeBlowfishSBoxes(&sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]), ARRAY_SIZE(pArray));
     assert(ArraysEqual1D(
-        pArray, sizeof(pArray) / sizeof(pArray[0]),
-        PArray,  sizeof(PArray) / sizeof(PArray[0])));
+        pArray, ARRAY_SIZE(pArray),
+        PArray,  ARRAY_SIZE(PArray)));
     printf("PASS: P-array generated with correct values.\n");
     assert(ArraysEqual2D(
-        &sBoxes[0][0], sizeof(sBoxes) / sizeof(sBoxes[0]), sizeof(sBoxes[0]) / sizeof(sBoxes[0][0]),
-        &SBoxes[0][0],  sizeof(SBoxes) / sizeof(SBoxes[0]), sizeof(SBoxes[0]) / sizeof(SBoxes[0][0])));
+        &sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]),
+        &SBoxes[0][0],  ARRAY_SIZE(SBoxes), ARRAY_SIZE(SBoxes[0])));
     printf("PASS: Substitution boxes generated with correct values.\n");
     printf("All tests passed.\n");
     return 0;
