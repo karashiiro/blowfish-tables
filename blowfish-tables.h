@@ -57,14 +57,10 @@ unsigned char _bftCalcPiFractionalDigit(size_t n) {
 }
 
 unsigned _bftMakeGroup(size_t n) {
-    unsigned group = _bftCalcPiFractionalDigit(n + 1);
-    group = (group << 4) | _bftCalcPiFractionalDigit(n + 2);
-    group = (group << 4) | _bftCalcPiFractionalDigit(n + 3);
-    group = (group << 4) | _bftCalcPiFractionalDigit(n + 4);
-    group = (group << 4) | _bftCalcPiFractionalDigit(n + 5);
-    group = (group << 4) | _bftCalcPiFractionalDigit(n + 6);
-    group = (group << 4) | _bftCalcPiFractionalDigit(n + 7);
-    group = (group << 4) | _bftCalcPiFractionalDigit(n + 8);
+    unsigned group;
+    for (int i = 1; i <= 8; i++) {
+        group = (group << 4) | _bftCalcPiFractionalDigit(n + i);
+    }
     return group;
 }
 
