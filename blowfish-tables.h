@@ -33,7 +33,7 @@ double _bftCalcPiInfiniteSum(size_t n, int j) {
     double fractional;
     while ((fractional = numerator / denominator) > DBL_EPSILON) {
         sum += fractional;
-        numerator /= 16;
+        numerator *= 1.0 / 16;
         denominator += 8;
     }
     return sum;
@@ -45,10 +45,10 @@ double _bftCalcPiSum(size_t n, int j) {
     double sum = _bftCalcPiInfiniteSum(n, j);
     size_t denominator = j;
     for (int k = 0; k <= n; k++) {
-        sum = _bftFPart(sum + (double)_bftPowermod(16, n - k, denominator) / denominator);
+        sum += (double)_bftPowermod(16, n - k, denominator) / denominator;
         denominator += 8;
     }
-    return _bftFPart(sum);
+    return sum;
 }
 
 /* See https://en.wikipedia.org/wiki/Bailey–Borwein–Plouffe_formula#BBP_digit-extraction_algorithm_for_π */
