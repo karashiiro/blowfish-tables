@@ -44,7 +44,7 @@ double _bftCalcPiSum(size_t n, int j) {
     // Start with the infinite sum rather than adding it at the end
     double sum = _bftCalcPiInfiniteSum(n, j);
     size_t denominator = j;
-    for (int k = 0; k <= n; k++) { // Repeated with the same values many times; very inefficient
+    for (int k = 0; k <= n; k++) {
         sum = _bftFPart(sum + (double)_bftPowermod(16, n - k, denominator) / denominator);
         denominator += 8;
     }
@@ -53,18 +53,17 @@ double _bftCalcPiSum(size_t n, int j) {
 
 /* See https://en.wikipedia.org/wiki/Bailey–Borwein–Plouffe_formula#BBP_digit-extraction_algorithm_for_π */
 unsigned int _bftCalcPiFractionalDigit(size_t n) {
-    n--;
-    double sum1 = 4 * _bftCalcPiSum(n, 1);
-    double sum2 = 2 * _bftCalcPiSum(n, 4);
+    double sum1 = _bftCalcPiSum(n, 1);
+    double sum2 = _bftCalcPiSum(n, 4);
     double sum3 = _bftCalcPiSum(n, 5);
     double sum4 = _bftCalcPiSum(n, 6);
-    return (unsigned int)floor(16 * _bftFPart(sum1 - sum2 - sum3 - sum4));
+    return (unsigned int)floor(16 * _bftFPart(4 * sum1 - 2 * sum2 - sum3 - sum4));
 }
 
 unsigned int _bftMakeGroup(size_t n) {
     unsigned int group;
     for (int i = 1; i <= 8; i++) {
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + i);
+        group = (group << 4) | _bftCalcPiFractionalDigit(n + i - 1);
     }
     return group;
 }
