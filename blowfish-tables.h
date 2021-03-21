@@ -55,17 +55,16 @@ unsigned int _bftMakeGroup(size_t n) {
 
 /** Builds a Blowfish p-array into the provided buffer. */
 void MakeBlowfishPArray(unsigned int *pArray, size_t subkeyCount) {
-    size_t halfBytes = subkeyCount * 8;
-    for (size_t n = 0; n < halfBytes; n += 8) {
-        pArray[n / 8] = _bftMakeGroup(n);
+    for (size_t n = 0; n < subkeyCount; n++) {
+        pArray[n] = _bftMakeGroup(n * 8);
     }
 }
 
 /** Builds Blowfish substitution boxes into the provided buffer. */
 void MakeBlowfishSBoxes(unsigned int *sBoxes, size_t boxCount, size_t boxSize, size_t pSubkeys) {
-    size_t halfBytes = boxCount * boxSize * 8;
-    for (size_t n = 0; n < halfBytes; n += 8) {
-        sBoxes[n / 8] = _bftMakeGroup(pSubkeys * 8 + n);
+    size_t subkeyCount = boxCount * boxSize;
+    for (size_t n = 0; n < subkeyCount; n++) {
+        sBoxes[n] = _bftMakeGroup(8 * (pSubkeys + n));
     }
 }
 
