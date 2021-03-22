@@ -1,6 +1,7 @@
 # blowfish-tables
-A single-header library for generating Blowfish tables, so you don't need to hardcode them into your
-projects. Allows arbitrary table sizes to handle modified forms of the algorithm.
+A single-header C99 library for generating Blowfish tables, so you don't need to hardcode them into your projects. Allows arbitrary table sizes to handle modified forms of the algorithm.
+
+Uses [OpenMP](https://www.openmp.org/).
 
 ## Installation
 Include `blowfish-tables.h` in a source file and pass the compiler option `-fopenmp` on build.
