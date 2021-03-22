@@ -1,7 +1,6 @@
 #ifndef MAKE_BLOWFISH_TABLES
 #define MAKE_BLOWFISH_TABLES
 
-#include <math.h>
 #include <stddef.h>
 
 // https://en.wikipedia.org/wiki/Modular_exponentiation#Pseudocode
@@ -22,8 +21,14 @@ static inline unsigned long long _bftPowermod(unsigned long long base, unsigned 
     return result;
 }
 
+// https://stackoverflow.com/a/26091248
+double _bftFloor(double x) {
+    int xi = (int)x;
+    return x < xi ? xi - 1 : xi;
+}
+
 double _bftFPart(double x) {
-    return x - floor(x);
+    return x - _bftFloor(x);
 }
 
 // Based on https://giordano.github.io/blog/2017-11-21-hexadecimal-pi/
@@ -44,7 +49,7 @@ unsigned int _bftCalcPiFractionalDigit(size_t n) {
     double sum2 = _bftCalcPiSum(n, 4);
     double sum3 = _bftCalcPiSum(n, 5);
     double sum4 = _bftCalcPiSum(n, 6);
-    return (unsigned int)floor(16 * _bftFPart(4 * sum1 - 2 * sum2 - sum3 - sum4));
+    return (unsigned int)_bftFloor(16 * _bftFPart(4 * sum1 - 2 * sum2 - sum3 - sum4));
 }
 
 unsigned int _bftMakeGroup(size_t n) {
