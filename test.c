@@ -44,15 +44,15 @@ bool ArraysEqual2D(
     return true;
 }
 
+static unsigned int pArray[18];
+static unsigned int sBoxes[4][256];
 int main() {
-    unsigned int pArray[18];
     MakeBlowfishPArray(pArray, ARRAY_SIZE(pArray));
     assert(ArraysEqual1D(
         pArray, ARRAY_SIZE(pArray),
         PArray,  ARRAY_SIZE(PArray)));
     printf("PASS: P-array generated with correct values.\n");
 
-    unsigned int sBoxes[4][256];
     MakeBlowfishSBoxes(&sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]), ARRAY_SIZE(pArray));
     assert(ArraysEqual2D(
         &sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]),
