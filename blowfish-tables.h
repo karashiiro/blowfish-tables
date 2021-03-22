@@ -65,6 +65,7 @@ unsigned int _bftMakeGroup(size_t n) {
         digits[i] <<= (32 - (i + 1) * 4);
     }
 
+    #pragma omp simd reduction(|:group)
     for (int i = 0; i < 8; i++) {
         group |= digits[i];
     }
