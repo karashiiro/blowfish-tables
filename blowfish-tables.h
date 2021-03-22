@@ -7,7 +7,7 @@
 // https://en.wikipedia.org/wiki/Modular_exponentiation#Pseudocode
 // These must be 64-bit unsigned integers, or the base^2 operation will
 // overflow for large bases.
-unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp, unsigned long long mod) {
+static inline unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp, unsigned long long mod) {
     if (mod == 1)
         return 0;
     unsigned long long result = 1;
@@ -27,7 +27,7 @@ double _bftFPart(double x) {
 }
 
 // Based on https://giordano.github.io/blog/2017-11-21-hexadecimal-pi/
-double _bftCalcPiSum(size_t n, int j) {
+double _bftCalcPiSum(size_t n, size_t j) {
     double sum = 0.0;
     size_t denominator = j;
     for (size_t k = 0; k <= n; k++) {
@@ -49,8 +49,13 @@ unsigned int _bftCalcPiFractionalDigit(size_t n) {
 
 unsigned int _bftMakeGroup(size_t n) {
     unsigned int group;
+    unsigned int digits[8];
+    #pragma omp parallel for
     for (size_t i = 1; i <= 8; i++) {
-        group = (group << 4) | _bftCalcPiFractionalDigit(n + i - 1);
+        digits[i - 1] = _bftCalcPiFractionalDigit(n + i - 1);
+    }
+    for (size_t i = 1; i <= 8; i++) {
+        group = (group << 4) | digits[i - 1];
     }
     return group;
 }
