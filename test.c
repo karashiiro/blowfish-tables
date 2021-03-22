@@ -18,6 +18,7 @@ bool ArraysEqual1D(
 
     for (size_t i = 0; i < arr1Size; i++) {
         if (arr1[i] != arr2[i]) {
+            printf("%x does not match %x at index %d.\n", arr1[i], arr2[i], i);
             return false;
         }
     }
@@ -34,6 +35,7 @@ bool ArraysEqual2D(
     for (size_t i = 0; i < arr1Size1; i++) {
         for (size_t j = 0; j < arr1Size2; j++) {
             if (arr1[i * arr1Size2 + j] != arr2[i * arr2Size2 + j]) {
+                printf("%x does not match %x at index [%d, %d].\n", arr1[i * arr1Size2 + j], arr2[i * arr2Size2 + j], i, j);
                 return false;
             }
         }
