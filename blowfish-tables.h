@@ -55,12 +55,12 @@ unsigned int _bftCalcPiFractionalDigit(size_t n) {
 unsigned int _bftMakeGroup(size_t n) {
     unsigned int group;
     unsigned int digits[8];
-    
+
     #pragma omp parallel for default(none) firstprivate(n) shared(digits)
     for (size_t i = 0; i < 8; i++) {
         digits[i] = _bftCalcPiFractionalDigit(n + i);
     }
-    
+
     // Generally gets automatically vectorized better than OpenMP does it
     for (int i = 0; i < 8; i++) {
         digits[i] <<= (32 - (i + 1) * 4);
