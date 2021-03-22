@@ -30,7 +30,7 @@ double _bftFPart(double x) {
 double _bftCalcPiSum(size_t n, int j) {
     double sum = 0.0;
     size_t denominator = j;
-    for (int k = 0; k <= n; k++) {
+    for (size_t k = 0; k <= n; k++) {
         sum += (double)_bftPowermod(16, n - k, denominator) / denominator;
         denominator += 8;
     }
@@ -49,7 +49,7 @@ unsigned int _bftCalcPiFractionalDigit(size_t n) {
 
 unsigned int _bftMakeGroup(size_t n) {
     unsigned int group;
-    for (int i = 1; i <= 8; i++) {
+    for (size_t i = 1; i <= 8; i++) {
         group = (group << 4) | _bftCalcPiFractionalDigit(n + i - 1);
     }
     return group;
