@@ -5,10 +5,12 @@
 #include <stddef.h>
 
 // https://en.wikipedia.org/wiki/Modular_exponentiation#Pseudocode
-size_t _bftPowermod(size_t base, size_t exp, size_t mod) {
+// These must be 64-bit unsigned integers, or the base^2 operation will
+// overflow for large bases.
+unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp, unsigned long long mod) {
     if (mod == 1)
         return 0;
-    size_t result = 1;
+    unsigned long long result = 1;
     base %= mod;
     while (exp > 0) {
         if (exp % 2 == 1) {
