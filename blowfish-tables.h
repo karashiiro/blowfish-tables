@@ -22,8 +22,8 @@ static inline unsigned long long _bftPowermod(unsigned long long base, unsigned 
 }
 
 // https://stackoverflow.com/a/26091248
-double _bftFloor(double x) {
-    int xi = (int)x;
+unsigned int _bftFloor(double x) {
+    unsigned int xi = (unsigned int)x;
     return x < xi ? xi - 1 : xi;
 }
 
@@ -49,7 +49,7 @@ unsigned int _bftCalcPiFractionalDigit(size_t n) {
     double sum2 = _bftCalcPiSum(n, 4);
     double sum3 = _bftCalcPiSum(n, 5);
     double sum4 = _bftCalcPiSum(n, 6);
-    return (unsigned int)_bftFloor(16 * _bftFPart(4 * sum1 - 2 * sum2 - sum3 - sum4));
+    return _bftFloor(16 * _bftFPart(4 * sum1 - 2 * sum2 - sum3 - sum4));
 }
 
 unsigned int _bftMakeGroup(size_t n) {
