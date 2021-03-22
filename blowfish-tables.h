@@ -55,13 +55,20 @@ unsigned int _bftCalcPiFractionalDigit(size_t n) {
 unsigned int _bftMakeGroup(size_t n) {
     unsigned int group;
     unsigned int digits[8];
-    #pragma omp parallel for firstprivate(n) shared(digits)
-    for (size_t i = 1; i <= 8; i++) {
-        digits[i - 1] = _bftCalcPiFractionalDigit(n + i - 1);
+    
+    #pragma omp parallel for default(none) firstprivate(n) shared(digits)
+    for (size_t i = 0; i < 8; i++) {
+        digits[i] = _bftCalcPiFractionalDigit(n + i);
     }
-    for (size_t i = 1; i <= 8; i++) {
-        group = (group << 4) | digits[i - 1];
+    
+    for (int i = 0; i < 8; i++) {
+        digits[i] <<= (32 - (i + 1) * 4);
     }
+
+    for (int i = 0; i < 8; i++) {
+        group |= digits[i];
+    }
+
     return group;
 }
 
