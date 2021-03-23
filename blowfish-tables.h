@@ -61,7 +61,6 @@ unsigned int _bftMakeGroup(size_t n) {
         digits[i] = _bftCalcPiFractionalDigit(n + i);
     }
 
-    // Generally gets automatically vectorized better than OpenMP does it
     for (int i = 0; i < 8; i++) {
         digits[i] <<= (32 - (i + 1) * 4);
     }
