@@ -7,8 +7,6 @@
 // These must be 64-bit unsigned integers, or the base^2 operation will
 // overflow for large bases.
 static inline unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp, unsigned long long mod) {
-    if (mod == 1)
-        return 0;
     unsigned long long result = 1;
     base %= mod;
     while (exp > 0) {
@@ -56,7 +54,9 @@ unsigned int _bftMakeGroup(size_t n) {
     unsigned int group;
     unsigned int digits[8];
 
-    #pragma omp parallel for default(none) firstprivate(n) shared(digits)
+    #pragma omp \
+        parallel for default(none) firstprivate(n) shared(digits) \
+        if(n > 18)
     for (size_t i = 0; i < 8; i++) {
         digits[i] = _bftCalcPiFractionalDigit(n + i);
     }
