@@ -25,7 +25,7 @@ static inline unsigned long long _bftPowermod(unsigned long long base, unsigned 
 }
 
 // https://stackoverflow.com/a/26091248
-static inline unsigned int _bftFloor(double x) {
+unsigned int _bftFloor(double x) {
     unsigned int xi = (unsigned int)x;
     return (x < xi) * (xi - 1) + (x >= xi) * xi;
 }
