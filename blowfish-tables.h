@@ -11,12 +11,14 @@ unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp,
     base %= mod;
     for (; exp > 0; exp >>= 1) {
         if (exp & 1) {
-            result = (result * base);
+            result *= base;
+            // This probably doesn't generalize well, but that
+            // doesn't matter here since my base is known to be 16.
             if (result > 0xFFFFFF00) {
                 result %= mod;
             }
         }
-        base = (base * base);
+        base *= base;
         if (base > 0xFFFFFF00) {
             base %= mod;
         }
