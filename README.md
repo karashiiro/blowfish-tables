@@ -4,7 +4,7 @@ A single-header C99 library for generating Blowfish tables, so you don't need to
 Uses [OpenMP](https://www.openmp.org/).
 
 ## Installation
-Include `blowfish-tables.h` in a source file and pass the compiler option `-fopenmp` on build, or `/openmp` with MSVC.
+Include `blowfish-tables.h` in a source file and pass the compiler option `-fopenmp` on build, or `/openmp` with MSVC. The library can be included without OpenMP support, but it will only use a single core.
 
 ## Usage
 ```c
@@ -23,6 +23,8 @@ MakeBlowfishSBoxes(&sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]), ARR
 
 ## Performance
 On the typical configuration -- an 18-subkey P-array and 4 256-subkey substitution boxes -- it takes between 3 and 5 seconds to generate both tables on a 4-core Intel Core i5-7500.
+
+With OpenMP disabled, this runs in around 16 seconds on the same CPU.
 
 ## Valgrind stuff
 
