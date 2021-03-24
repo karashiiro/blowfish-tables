@@ -1,3 +1,5 @@
+// Refer to https://github.com/karashiiro/blowfish-tables for the README and latest version of this file.
+
 #ifndef MAKE_BLOWFISH_TABLES
 #define MAKE_BLOWFISH_TABLES
 
