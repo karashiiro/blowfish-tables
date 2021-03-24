@@ -26,7 +26,7 @@ unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp,
             base %= mod;
         }
     }
-    return result;
+    return result % mod;
 }
 
 // https://stackoverflow.com/a/26091248
