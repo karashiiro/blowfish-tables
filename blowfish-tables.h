@@ -15,7 +15,8 @@ unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp,
         if (exp & 1) {
             result *= base;
             // This probably doesn't generalize well, but that
-            // doesn't matter here since my base is known to be 16.
+            // doesn't matter here since it works and has a huge
+            // impact on performance.
             if (result > 0xFFFFFFFF) {
                 result %= mod;
             }
