@@ -6,7 +6,7 @@
 // https://en.wikipedia.org/wiki/Modular_exponentiation#Pseudocode
 // These must be 64-bit unsigned integers, or the base^2 operation will
 // overflow for large bases.
-static inline unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp, unsigned long long mod) {
+unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp, unsigned long long mod) {
     unsigned long long result = 1;
     base %= mod;
     for (; exp > 0; exp >>= 1) {
