@@ -3,8 +3,6 @@ A single-header C99 library for generating Blowfish tables, so you don't need to
 
 Uses [OpenMP](https://www.openmp.org/).
 
-**Not ready for actual use.**
-
 ## Installation
 Include `blowfish-tables.h` in a source file and pass the compiler option `-fopenmp` on build, or `/openmp` with MSVC.
 
