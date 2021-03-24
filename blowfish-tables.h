@@ -60,7 +60,7 @@ unsigned int _bftMakeGroup(size_t n) {
     unsigned int digits[8];
 
     #pragma omp \
-        parallel for default(none) firstprivate(n) shared(digits) \
+        parallel for firstprivate(n) shared(digits) \
         if(n > 18)
     for (size_t i = 0; i < 8; i++) {
         digits[i] = _bftCalcPiFractionalDigit(n + i);
