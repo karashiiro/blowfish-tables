@@ -1,10 +1,10 @@
 # blowfish-tables
 A single-header C99 library for generating Blowfish tables, so you don't need to hardcode them into your projects. Allows arbitrary table sizes to handle modified forms of the algorithm, with no guarantees on accuracy for larger sizes than the usual 18 subkey + 4x256 S-Box configuration.
 
-Uses [OpenMP](https://www.openmp.org/).
+For best results, uses [OpenMP](https://www.openmp.org/).
 
 ## Installation
-Include `blowfish-tables.h` in a source file and pass the compiler option `-fopenmp` on build, or `/openmp` with MSVC. The library can be included without OpenMP support, but it will only use a single core.
+Include `blowfish-tables.h` in a source file and pass the compiler option `-fopenmp` on build, or `/openmp` with MSVC. The library can be included without OpenMP compiler options, but it will only use a single core.
 
 ## Usage
 ```c
