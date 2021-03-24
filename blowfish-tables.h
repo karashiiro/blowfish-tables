@@ -10,11 +10,17 @@ static inline unsigned long long _bftPowermod(unsigned long long base, unsigned 
     unsigned long long result = 1;
     base %= mod;
     while (exp > 0) {
-        if (exp % 2 == 1) {
-            result = (result * base) % mod;
+        if (exp & 1) {
+            result = (result * base);
+            if (result > 0xFFFFFF00) {
+                result %= mod;
+            }
         }
         exp = exp >> 1;
-        base = (base * base) % mod;
+        base = (base * base);
+        if (base > 0xFFFFFF00) {
+            base %= mod;
+        }
     }
     return result;
 }
