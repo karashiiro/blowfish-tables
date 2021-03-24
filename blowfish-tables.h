@@ -12,13 +12,13 @@ static inline unsigned long long _bftPowermod(unsigned long long base, unsigned 
     while (exp > 0) {
         if (exp & 1) {
             result = (result * base);
-            if (result > 0x6FFFFFFF) {
+            if (result > 0x8FFFFFFF) {
                 result %= mod;
             }
         }
         exp = exp >> 1;
         base = (base * base);
-        if (base > 0x6FFFFFFF) {
+        if (base > 0x8FFFFFFF) {
             base %= mod;
         }
     }
