@@ -6,7 +6,7 @@ Uses [OpenMP](https://www.openmp.org/).
 **Not ready for actual use.**
 
 ## Installation
-Include `blowfish-tables.h` in a source file and pass the compiler options `-fopenmp` on build, or `/openmp` with MSVC.
+Include `blowfish-tables.h` in a source file and pass the compiler option `-fopenmp` on build, or `/openmp` with MSVC.
 
 ## Usage
 ```c
