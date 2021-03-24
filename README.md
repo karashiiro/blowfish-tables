@@ -26,7 +26,7 @@ On the typical configuration -- an 18-subkey P-array and 4 256-subkey substituti
 
 With OpenMP disabled, this runs in around 16 seconds on the same CPU.
 
-## Valgrind stuff
+## Valgrind stuff (OpenMP only)
 
 ### There's a memory leak...
 [There isn't.](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=36298)
