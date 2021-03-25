@@ -41,9 +41,9 @@ double _bftFPart(double x) {
 
 // Based on https://giordano.github.io/blog/2017-11-21-hexadecimal-pi/
 double _bftCalcPiSum(size_t n, size_t j) {
-    double sum = 1.0 / (8 * n + j); // k == n
+    double sum = 0;
     size_t denominator = j;
-    for (size_t k = 0; k < n; k++) {
+    for (size_t k = 0; k <= n; k++) {
         sum += (double)_bftPowermod(16, n - k, denominator) / denominator;
         denominator += 8;
     }
