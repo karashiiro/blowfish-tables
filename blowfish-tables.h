@@ -26,7 +26,11 @@ unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp,
             base %= mod;
         }
     }
-    return result % mod;
+    // In a correct powermod implementation, we'd modulus here.
+    // We're only doing this to keep the fractional part of the
+    // sum, though, so that's unnecessary in this case because
+    // we use fPart later.
+    return result;
 }
 
 // https://stackoverflow.com/a/26091248
