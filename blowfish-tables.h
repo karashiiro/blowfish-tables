@@ -32,7 +32,7 @@ unsigned long long _bftPowermod(unsigned long long base, unsigned long long exp,
 // https://stackoverflow.com/a/26091248
 unsigned int _bftFloor(double x) {
     unsigned int xi = (unsigned int)x;
-    return (x < xi) * (xi - 1) + (x >= xi) * xi;
+    return x < xi ? xi - 1 : xi;
 }
 
 double _bftFPart(double x) {
