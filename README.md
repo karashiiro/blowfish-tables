@@ -21,6 +21,7 @@ MakeBlowfishSBoxes(&sBoxes[0][0], ARRAY_SIZE(sBoxes), ARRAY_SIZE(sBoxes[0]), ARR
 * You're reading this in 2040 and it takes less than a second for this to run on most machines?
 * You want more or larger substitution boxes or P-arrays -- even though I can't guarantee this generates them accurately?
 * You want to free the tables after using them to save on memory -- hardcoding them would mean a permanent 0-3kB addition to your binary over this.
+* You want to make it harder to determine that your program uses Blowfish, by not including hardcoded S-boxes in your binary (the S-boxes will still be in memory unless you free them when you're done using them).
 * It was interesting to write, and I learned some things about C, assembly, optimization, and OpenMP.
 
 ## Performance
